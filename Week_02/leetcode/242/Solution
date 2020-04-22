@@ -1,0 +1,37 @@
+class Solution {
+    public boolean isAnagram(String s, String t) {
+        if (s == null || t == null) {
+            return false;
+        }
+        char[] sArry = s.toCharArray();
+        char[] tArry = t.toCharArray();
+        Map<Character, Integer> map = new HashMap<>();
+        for (char i : sArry) {
+            if (map.containsKey(i)) {
+                Integer num = map.get(i);
+                num++;
+                map.put(i, num);
+            } else {
+                map.put(i, 1);
+            }
+        }
+        for (char i : tArry) {
+            if (map.containsKey(i)) {
+                Integer num = map.get(i);
+                num--;
+                if (num < 0) {
+                    return false;
+                }
+                map.put(i, num);
+            } else {
+                return false;
+            }
+        }
+        for (Map.Entry<Character, Integer> entry : map.entrySet()) {
+            if (entry.getValue() != 0) {
+                return false;
+            }
+        }
+        return true;
+    }
+}
