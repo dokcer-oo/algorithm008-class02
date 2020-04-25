@@ -1,9 +1,23 @@
 /**
- * 递归版本
+ * 迭代版本
  */
 class Solution1 {
     public List<Integer> preorder(Node root) {
-
+        LinkedList<Node> stack = new LinkedList<>();
+        LinkedList<Integer> outPut = new LinkedList<>();
+        if (null == root) {
+            return outPut;
+        }
+        stack.add(root);
+        while (!stack.isEmpty()) {
+            Node node = stack.pollLast();
+            outPut.add(node.val);
+            Collections.reverse(node.children);
+            for (Node item : node.children) {
+                stack.add(item);
+            }
+        }
+        return outPut;
     }
 }
 
