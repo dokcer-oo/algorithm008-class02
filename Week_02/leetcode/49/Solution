@@ -1,0 +1,19 @@
+class Solution {
+    public static String convert(String target) {
+        char[] arr =  target.toCharArray();
+        Arrays.sort(arr);
+        return String.valueOf(arr);
+    }
+
+    public List<List<String>> groupAnagrams(String[] strs) {
+        Map<String, List<String>> map = new HashMap<>();
+        for (String str : strs) {
+            String temp = convert(str);
+            if (!map.containsKey(temp)) {
+                map.put(temp, new ArrayList<>());
+            }
+            map.get(temp).add(str);
+        }
+        return new ArrayList<>(map.values());
+    }
+}
